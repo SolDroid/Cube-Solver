@@ -5,6 +5,10 @@ let viewport = document.getElementById("viewport")
 let Width = viewport.clientWidth
 let Height = viewport.clientHeight
 
+let stats = new Stats();
+stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild(stats.domElement);
+
 /* --------------------- THREE Setup --------------------- */
 
 // Create base THREE js scene
@@ -12,7 +16,7 @@ let scene = new THREE.Scene();
 
 // Create perspective camera
 // (fov, aspect ratio, near clip, far clip)
-var camera = new THREE.PerspectiveCamera(75, Width / Height, 0.1, 1000);
+let camera = new THREE.PerspectiveCamera(75, Width / Height, 0.1, 1000);
 camera.position.z = 2;
 
 // WebGL Renderer Setup
@@ -28,11 +32,11 @@ renderer.setSize(Width, Height);
 let mixer
 
 // Create ambient light
-var light = new THREE.AmbientLight(0xd5c1f8, 0.6);
+let light = new THREE.AmbientLight(0xd5c1f8, 0.6);
 scene.add(light);
 
 // Create directional light
-var directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
+let directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
 directionalLight.position.set(1, 1, 1)
 scene.add(directionalLight);
 
@@ -63,6 +67,8 @@ let clock = new THREE.Clock()
 
 // Render loop
 function render() {
+    stats.begin();
+
     // Lock to 60fps
     setTimeout(function () {
         requestAnimationFrame(render);
@@ -74,7 +80,9 @@ function render() {
     mesh.rotation.y += 0.01
 
     // Play animation
-    var delta = clock.getDelta();
+    let delta = clock.getDelta();
     if (mixer) mixer.update(delta);
+
+    stats.end();
 }
 render();
