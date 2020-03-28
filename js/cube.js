@@ -28,13 +28,17 @@ export default class Cube {
             Y: 0xFFFF82,
             W: 0xFAFAFA
         }
+
+        // Maps colour values to numbers
+        this.ColourMap = ['G', 'B', 'R', 'O', 'Y', 'W']
     }
 
     // Builds cube mesh
     build() {
-        for (let s = 0; s < 6; s++) {
+        let index = 0
+        for (const name in this.Names) {
             let side = {
-                name: this.Names[s],
+                name: name,
                 faces: []
             }
 
@@ -42,13 +46,15 @@ export default class Cube {
             for (let y = 0; y < this.Dimension; y++) {
                 let row = []
                 for (let x = 0; x < this.Dimension; x++) {
-                    let colour = this.Colours[s]
+                    let colour = this.Colours[this.ColourMap[index]]
                     row.push(colour)
                 }
                 side.faces.push(row)
             }
 
             this.Sides.push(side)
+
+            index++
         }
     }
 }
