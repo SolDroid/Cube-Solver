@@ -1,5 +1,7 @@
 import * as THREE from "./packages/three.module.js"
 
+import Cube from "./cube.js"
+
 let viewport = document.getElementById("viewport")
 
 let Width = viewport.clientWidth
@@ -60,6 +62,12 @@ function resize(e) {
     camera.updateProjectionMatrix();
 }
 window.addEventListener("resize", resize, false)
+
+/* --------------------- Cube Setup --------------------- */
+
+let cube = new Cube(2)
+cube.build()
+console.log(cube)
 
 /* --------------------- Rendering --------------------- */
 

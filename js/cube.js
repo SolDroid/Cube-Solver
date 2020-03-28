@@ -3,7 +3,7 @@ import * as THREE from "./packages/three.module.js"
 // Rubik's cube class
 export default class Cube {
     constructor(dimension, x = 0, y = 0) {
-        this.Pos = THREE.Vector2(x, y)
+        this.Pos = new THREE.Vector2(x, y)
         this.Dimension = dimension
 
         // Array of every sides individual faces
@@ -38,11 +38,14 @@ export default class Cube {
                 faces: []
             }
 
-            for (let x = 0; x < this.Dimension; x++) {
-                for (let y = 0; y < this.Dimension; y++) {
-                    colour = this.Colours[s]
-                    side.faces.push(colour)
+
+            for (let y = 0; y < this.Dimension; y++) {
+                let row = []
+                for (let x = 0; x < this.Dimension; x++) {
+                    let colour = this.Colours[s]
+                    row.push(colour)
                 }
+                side.faces.push(row)
             }
 
             this.Sides.push(side)
