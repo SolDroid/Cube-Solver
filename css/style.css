@@ -1,4 +1,9 @@
 /* Main styles */
+
+body {
+    background-color: black;
+}
+
 /* Rules for sizing the icon. */
 .material-icons.s-18 {
     font-size: 18px;
