@@ -70,11 +70,11 @@ export default class Cube {
     generateMesh() {
         let size = 1
         let faceSize = size / this.Dimension
-        let spacing = faceSize * 0.05
+        let spacing = faceSize * 0.1
 
         let coreGeo = new THREE.BoxGeometry(size - 0.001, size - 0.001, size - 0.001)
         let coreMat = new THREE.MeshBasicMaterial({
-            color: 0x000000
+            color: 0x212121
         })
         let core = new THREE.Mesh(coreGeo, coreMat)
 
@@ -141,15 +141,11 @@ export default class Cube {
                     yPos = (face.y - shift) * faceSize
                 }
 
-                console.log((face.x - shift) / shift, (face.y - shift) / shift)
-
                 let offset
 
                 if (transforms[side.name].rot == "none" || transforms[side.name].rot == "flip") offset = new THREE.Vector3(xPos, yPos, 0)
                 else if (transforms[side.name].rot == "y") offset = new THREE.Vector3(0, yPos, xPos)
                 else if (transforms[side.name].rot == "x") offset = new THREE.Vector3(xPos, 0, yPos)
-
-                // console.log(offset)
 
                 let plane = new THREE.PlaneGeometry(faceSize - spacing, faceSize - spacing)
 
